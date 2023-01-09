@@ -5,11 +5,22 @@
 .photograph-header {
     background-color: #FAFAFA;
     height: 300px;
-    margin: 0 100px;
+    margin: 0 130px;
     /* ajout */
     display: grid;
+    grid-template-columns: 1fr 0.2fr 1fr;
+    gap: 50px;
+}
+
+.sort_by {
+    margin-left: 100px;
+}
+
+.gallery {
+    display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    gap: 70px;
+    gap: 140px;
+    margin: 55px 100px;
 }
 
 .zone_btn {
