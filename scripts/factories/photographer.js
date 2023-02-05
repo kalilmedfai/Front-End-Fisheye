@@ -1,5 +1,5 @@
-function photographerFactory(data) {
-    const { id, name, portrait, city, country, tagline, price } = data;
+function photographerFactory(photographerData, photographerMedias) {
+    const { id, name, portrait, city, country, tagline, price } = photographerData;
 
     const picture = `assets/Photographers ID Photos/${portrait}`;
 
@@ -105,33 +105,40 @@ function photographerFactory(data) {
         return(div);
     }
 
-    function mediaFactory(data) {
-        const { id, photographerId, title, image, likes, date, price } = data;
-    
-        const picturesPhotographer = `assets/${name}/${image}`;
-    
-        function getGalleryPhotographerDOM() {
-            // ajout de la balise article que l'on nommme article
-            const article = document.createElement( 'article' );
-            // ajout de la balise img que l'on nommme img
-            const img = document.createElement( 'img' );
-            // ajout de l'attribut src
-            img.setAttribute("src", picturesPhotographer);
-            img.style.width = "350px";
-            img.style.height = "350px";
-            img.style.objectFit = "cover";
-            const div = document.createElement( 'div' );
-            const h3 = document.createElement ( 'h3' );
-            h3.textContent = title;
-    
-            article.appendChild(img);
-            article.appendChild(div);
-            div.appendChild(h3);
-            return(article);
-        }
-    
-        return { id, photographerId, title, picturesPhotographer, likes, date, price, getGalleryPhotographerDOM }
+    function getLikesOfPhotographerDOM() {
+        let totalLikes = photographerMedias.reduce((acc, item) => acc + item.likes, 0); 
+        // ajout de la balise div que l'on nommme div
+        const div = document.createElement( 'div' );
+        div.setAttribute("class", "likesOfPhotographer");
+        // ajout de la balise div que l'on nommme div1
+        const div1 = document.createElement( 'div' );
+        div1.setAttribute("class", "totalOfLikes");
+        div1.style.display = "flex";
+        div1.style.justifyContent = "center";
+        // ajout de la balise div que l'on nommme div2
+        const div2 = document.createElement( 'div' );
+        div2.setAttribute("class", "salaryPerDay");
+        const p1 = document.createElement( 'p' ); 
+        p1.setAttribute("id", "total_likes")
+        p1.textContent = totalLikes;
+        p1.style.fontWeight = "bold";
+        const i = document.createElement( 'i' );
+        i.setAttribute("class", "fa-solid fa-heart");
+        i.style.display = "flex";
+        i.style.alignItems = "center";
+        i.style.fontSize = "24px";
+        i.style.marginLeft = "10px";
+        const p2 = document.createElement( 'p' );
+        p2.textContent = price + "€ / jour";
+        p2.style.fontWeight = "bold";
+
+        div.appendChild(div1);
+        div.appendChild(div2);
+        div1.appendChild(p1)
+        div1.appendChild(i);
+        div2.appendChild(p2);
+        return(div);
     }
     
-    return { name, picture, city, country, tagline, price, getUserCardDOM, getInfoUserDOM, getProfilePictureUserDOM, mediaFactory }
+    return { name, picture, city, country, tagline, price, getUserCardDOM, getInfoUserDOM, getProfilePictureUserDOM, getLikesOfPhotographerDOM }
 }

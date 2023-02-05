@@ -23,31 +23,38 @@
         )*/
         console.log(photographer_find)
         
-        let filter_id = data.media.filter( obj => obj.photographerId === id_photographer)
+        let filter_id = data.media.filter( obj => obj.photographerId === id_photographer )
         console.log(filter_id)
+
         return {
             infoPhotographer : photographer_find,
             galleryPhotographers : filter_id,
         }
     }
 
-    async function displayData(infoPhotographer, galleryPhotographers) {
+    function displayData(infoPhotographer, galleryPhotographers) {
         const mainContainer = document.querySelector(".photograph-header");
 
-        const infoPhotographerModel = photographerFactory(infoPhotographer);
+        //new
+        const mainPage = document.querySelector("#main");
+
+        const infoPhotographerModel = photographerFactory(infoPhotographer, galleryPhotographers);
         const infoUserDOM = infoPhotographerModel.getInfoUserDOM();
         const pPUserDOM = infoPhotographerModel.getProfilePictureUserDOM();
+        //new
+        const likesTotalDOM = infoPhotographerModel.getLikesOfPhotographerDOM();
         mainContainer.prepend(infoUserDOM);
         mainContainer.appendChild(pPUserDOM);
+        //new
+        mainPage.appendChild(likesTotalDOM);
 
         const picturesContainer = document.querySelector(".gallery");
 
         galleryPhotographers.forEach((galleryPhotographer) => {
-            const galleryPhotographerModel = infoPhotographerModel.mediaFactory(galleryPhotographer);
+            const galleryPhotographerModel = mediaFactory(galleryPhotographer, infoPhotographer.name);
             const galleryPhotographerDOM = galleryPhotographerModel.getGalleryPhotographerDOM();
             picturesContainer.appendChild(galleryPhotographerDOM);
         });
-
     };
 
 
@@ -56,6 +63,8 @@
         const { infoPhotographer, galleryPhotographers } = await getInfoPhotographers();
         console.log(infoPhotographer);
         displayData(infoPhotographer, galleryPhotographers);
+        Lightbox.init()
     };
 
     init();
+ 
