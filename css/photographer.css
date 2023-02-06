@@ -197,7 +197,7 @@ form textarea {
     bottom: 0;
     width: 365px;
     background: #DB8876;
-    border-radius: 15px 15px 0 0;
+    border-radius: 5px 5px 0 0;
 }
 
 .totalOfLikes p {
@@ -217,4 +217,75 @@ form textarea {
 .fa-heart:hover {
     color: #901C1C;
     cursor: pointer;
+}
+
+.sort_by {
+    display: flex;
+}
+
+.dropdown {
+    position: relative;
+    margin-top: 10px;
+    margin-left: 10px;
+    background-color: #901C1C;
+    color: white;
+    width: 140px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0 10px 20px;
+    cursor: pointer;
+}
+
+
+.select:hover {
+    background: #8b3b3b;
+}
+
+.caret {
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 6px solid #fff;
+    margin-right: 10px;
+    transition: 0.3s;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    z-index: 1;
+    transform: translateY(-50%);
+}
+
+.caret-rotate {
+    transform: translateY(-50%) rotate(180deg);
+}
+
+.menu {
+    list-style: none;
+    padding-left: 0;
+    position: absolute;
+    width: 100%;
+    margin: 0;
+    top: 0;
+    left: 0;
+}
+
+.menu li {
+    padding: 10px 0 10px 20px;
+    cursor: pointer;
+    background-color: #901C1C;
+    display: none;
+}
+
+.menu li.active {
+    display: block;
+}
+
+.menu-open li {
+    display: block;
+}
+
+.menu li:hover {
+    background: #8b3b3b;
 }
