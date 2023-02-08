@@ -39,7 +39,7 @@ function mediaFactory(mediaData, photographerName) {
         const i = document.createElement( 'i' );
         i.setAttribute("class", "fa-regular fa-heart");
         i.setAttribute("id", randomId.toString());
-        i.addEventListener('click', async (i) => { 
+        i.addEventListener('click', async () => { 
             const likesNow = localStorage.setItem("likeNow", parseInt(document.getElementById("total_likes").textContent));
 
             const btn = document.getElementById(randomId.toString())

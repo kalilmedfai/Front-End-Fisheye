@@ -32,7 +32,7 @@
         }
     }
 
-    function displayData(infoPhotographer, galleryPhotographers) {
+    async function displayData(infoPhotographer, galleryPhotographers) {
         const mainContainer = document.querySelector(".photograph-header");
 
         //new
@@ -57,12 +57,69 @@
         });
     };
 
+    async function resetGallery() {
+        const picturesContainer = document.querySelector(".gallery");
+
+        picturesContainer.innerHTML = '';
+    }
+
+    async function sortImagesInGallery(byTitle=false, byPopularity=false, byDate=false) {
+        const { infoPhotographer, galleryPhotographers } = await getInfoPhotographers();
+        console.log(galleryPhotographers)
+        if (byPopularity) {
+            const gallery = galleryPhotographers.sort((a, b) => b.likes - a.likes);   
+            await resetGallery(); 
+            const picturesContainer = document.querySelector(".gallery");
+
+            gallery.forEach((galleryPhotographer) => {
+                const galleryPhotographerModel = mediaFactory(galleryPhotographer, infoPhotographer.name);
+                const galleryPhotographerDOM = galleryPhotographerModel.getGalleryPhotographerDOM();
+                picturesContainer.appendChild(galleryPhotographerDOM);
+            });
+        } else if (byTitle) {
+            const gallery = galleryPhotographers.sort((a, b) => {
+                if (a.title < b.title) {
+                    return -1;
+                }
+                if (a.title > b.title) {
+                    return 1;
+                }
+                return 0; 
+            });
+
+            await resetGallery(); 
+            const picturesContainer = document.querySelector(".gallery");
+
+            gallery.forEach((galleryPhotographer) => {
+                const galleryPhotographerModel = mediaFactory(galleryPhotographer, infoPhotographer.name);
+                const galleryPhotographerDOM = galleryPhotographerModel.getGalleryPhotographerDOM();
+                picturesContainer.appendChild(galleryPhotographerDOM);
+            });
+        } else {
+            const gallery = galleryPhotographers.sort((a, b) => {
+                const dateA = new Date(a.date);
+                const dateB = new Date(b.date);
+                return dateB - dateA; 
+            }) 
+
+            await resetGallery(); 
+            const picturesContainer = document.querySelector(".gallery");
+
+            gallery.forEach((galleryPhotographer) => {
+                const galleryPhotographerModel = mediaFactory(galleryPhotographer, infoPhotographer.name);
+                const galleryPhotographerDOM = galleryPhotographerModel.getGalleryPhotographerDOM();
+                picturesContainer.appendChild(galleryPhotographerDOM);
+            });
+
+        }
+    }
+
 
     async function init() {
         // Récupère les datas du photographe
         const { infoPhotographer, galleryPhotographers } = await getInfoPhotographers();
-        console.log(infoPhotographer);
-        displayData(infoPhotographer, galleryPhotographers);
+        console.log("Photographer", infoPhotographer);
+        await displayData(infoPhotographer, galleryPhotographers);
         Lightbox.init()
     };
 
