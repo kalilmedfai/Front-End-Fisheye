@@ -85,12 +85,13 @@ class Lightbox {
         const dom = document.createElement('div')
         dom.classList.add('lightbox')
         dom.innerHTML = `
-            <img class="lightbox__close" src="assets/icons/close_lightbox.svg"/>
-            <img class="lightbox__next" src="assets/icons/chevron-right.svg"/>
-            <img class="lightbox__prev" src="assets/icons/chevron-left.svg"/>
+            <img class="lightbox__close" src="assets/icons/close_lightbox.svg" aria-label="Bouton pour fermer la lightbox"/>
+            <img class="lightbox__next" src="assets/icons/chevron-right.svg" aria-label="Bouton pour passer à l'image suivante"/>
+            <img class="lightbox__prev" src="assets/icons/chevron-left.svg" aria-label="Bouton pour revenir à l'image précédente"/>
             <div class="lightbox__container">
-                <img src="${url}" alt="">
-            </div>`
+                <img src="${url}" alt="">                
+            </div>
+            <div class="title_of_picture">TEST</div>`
         dom.querySelector('.lightbox__close').addEventListener('click', this.close.bind(this))
         dom.querySelector('.lightbox__next').addEventListener('click', this.next.bind(this))
         dom.querySelector('.lightbox__prev').addEventListener('click', this.prev.bind(this))

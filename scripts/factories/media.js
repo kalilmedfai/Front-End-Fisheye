@@ -13,13 +13,14 @@ function mediaFactory(mediaData, photographerName) {
         img.setAttribute("tabindex", "0");
         img.setAttribute("role", "button");
         img.classList.add("photographer_image");
-        img.style.width = "350px";
-        img.style.height = "350px";
+        img.style.width = "100%";
+        img.style.height = "25vw";
         img.style.objectFit = "cover";
         const div = document.createElement( 'div' );
         div.style.display = "flex";
         div.style.justifyContent = "space-between";
         div.style.alignItems = "center";
+        div.style.width = "100%";
         const div2 = document.createElement( 'div' );
         const h3 = document.createElement ( 'h3' );
         h3.textContent = title;
@@ -33,7 +34,7 @@ function mediaFactory(mediaData, photographerName) {
 
 
         const minimumNumber = 1;
-        const maximumNumber = 5000;
+        const maximumNumber = 50;
         const randomId = Math.random() * (maximumNumber - minimumNumber) + minimumNumber;
 
         const i = document.createElement( 'i' );

@@ -7,12 +7,14 @@ function photographerFactory(photographerData, photographerMedias) {
         const a = document.createElement( 'a' );
         a.setAttribute("href", `photographer.html?id=${id}`)
         a.setAttribute("id", "photographer__link")
+        a.setAttribute("title", `Visiter la page de ${name} ?`)
         // ajout de la balise article que l'on nommme article
         const article = document.createElement( 'article' );
         // ajout de la balise img que l'on nommme img
         const img = document.createElement( 'img' );
         // ajout de l'attribut src
         img.setAttribute("src", picture)
+        img.setAttribute("alt", `Photo de profil de ${name} ?`)
         // ajout de la balise h2 que l'on nommme h2
         const h2 = document.createElement( 'h2' );
         // affichage de h2

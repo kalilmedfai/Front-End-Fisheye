@@ -34,7 +34,6 @@
 
     async function displayData(infoPhotographer, galleryPhotographers) {
         const mainContainer = document.querySelector(".photograph-header");
-
         //new
         const mainPage = document.querySelector("#main");
 
@@ -120,6 +119,29 @@
         const { infoPhotographer, galleryPhotographers } = await getInfoPhotographers();
         console.log("Photographer", infoPhotographer);
         await displayData(infoPhotographer, galleryPhotographers);
+
+        const contact_btn = document.querySelector(".contact_button");
+
+        const closeForm = document.querySelector(".close_contact_form")
+
+        contact_btn.addEventListener('click', () => {
+            displayModal()
+        })
+
+        closeForm.addEventListener('click', () => {
+            closeModal()
+        })
+
+        closeForm.addEventListener('keydown', (event) => {
+            if (!(event.keyCode === 13 || event.key === 'Enter' || event.code === 'Enter')) return;
+            closeModal();
+        })
+
+        document.addEventListener('keydown', (event) => {
+            if (!(event.keyCode === 27 || event.key === 'Escape' || event.code === 'Escape')) return;
+            closeModal();
+        })
+
         Lightbox.init()
     };
 

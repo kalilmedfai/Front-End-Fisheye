@@ -1,26 +1,28 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
   <head>
     <link href="css/style.css" rel="stylesheet" type="text/css" />
     <meta charset="utf-8">
     <link rel="icon" type="image/png" href="assets/favicon.png">
     <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
-    <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
     <title>Fisheye - photographe </title>
   </head>
+
   <body>
-    <header>
-      <a href="index.html">
-        <img src="assets/images/logo.png" class="logo" />
+
+    <header tabindex="0" aria-label="En-tête de la page">
+      <a href="index.html" title="Lien vers la page d'acceuil">
+        <img src="assets/images/logo.png" class="logo" alt="Logo du site de FishEye" />
       </a>
     </header>
+
     <main id="main">
 
-      <div class="photograph-header">
+      <div class="photograph-header" >
         
         <div class="zone_btn">
-          <button class="contact_button" onclick="displayModal()">Contactez-moi</button>
+          <button class="contact_button">Contactez-moi</button>
         </div>
         
       </div>
@@ -28,13 +30,12 @@
       <div class="sort_by">
         <p><b>Trier par</b></p>
 
-        <div class="dropdown">
+        <div class="dropdown" tabindex="0">
           <div class="caret"></div>
           <ul class="menu">
-            <li class="active"></li> 
-            <li onclick="sortImagesInGallery(false, true, false)">Popularité</li>
-            <li onclick="sortImagesInGallery(false, false, true)">Date</li>
-            <li onclick="sortImagesInGallery(true, false, false);">Titre</li>
+            <li tabindex="0" class="active">Popularité</li>
+            <li tabindex="0">Date</li>
+            <li tabindex="0">Titre</li>
           </ul>
         </div>
       </div>
@@ -48,7 +49,7 @@
 			<div class="modal">
 				<header>
           <h2>Contactez-moi</h2>
-          <img src="assets/icons/close.svg" onclick="closeModal()" />
+          <img src="assets/icons/close.svg" tabindex="0" alt="Fermer la modal" class="close_contact_form"/>
         </header>
 				<form>
 					<div>
@@ -62,7 +63,7 @@
 						<input type="email" id="email" name="email" required/>
             <span id="error3"></span>
             <label>Votre message</label>
-						<textarea type="text" id="message" name="message" required></textarea>
+						<textarea id="message" name="message" cols="30" rows="10" required></textarea>
             <span id="error4"></span>
 					</div>
           <button class="contact_button" type="submit">Envoyer</button>
