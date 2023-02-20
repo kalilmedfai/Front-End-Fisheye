@@ -181,6 +181,11 @@ form textarea {
     max-height: 85vh;
     object-fit: contain;
     height: auto;
+} 
+
+.lightbox__container iframe {
+    width: 70vw;
+    height: 81vh;
 }
 
 .lightbox__container {
