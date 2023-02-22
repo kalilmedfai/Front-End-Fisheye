@@ -1,29 +1,36 @@
 class Lightbox {
 
     static init() {
+        // variable links permet de selectionner toute les images dans le tableau
         const links = Array.from(document.querySelectorAll('img[src$=".jpg"].photographer_image, img[src$=".png"].photographer_image, img[src$=".jpeg"].photographer_image'))
+        // variable linksvideo permet de selectionner toute les video dans le tableau
         const linksVideo = Array.from(document.getElementsByTagName('video'))
    
-
+        // on crée un nouveau tableau grace au map
         const listOfPictures = links.map(link => link.getAttribute('src')); 
         const linkOfVideos = linksVideo.map(link => link.getAttribute("src"));
         
-        
+        // creation boucle
         for (const linkImage of links) {
+            // evenement au click de linkImage pour creer une nouvelle lightbox
             linkImage.addEventListener('click', e => {
+                console.log('open Lightbox')
                 new Lightbox(e.currentTarget.getAttribute('src'), listOfPictures, linkOfVideos); 
             });
+            // evenement à la navigation au clavier de linkImage pour creer une nouvelle lightbox
             linkImage.addEventListener('keydown', e => {
                 if (e.keyCode === 13 || e.keyCode === 32 ) {
                     new Lightbox(e.currentTarget.getAttribute('src'), listOfPictures, linkOfVideos); 
                 }
             });
         }
-
+        // creation boucle
         for (const linkvideo of linksVideo) {
+            // evenement au click de linkvideo pour creer une nouvelle lightbox
             linkvideo.addEventListener('click', e => {
                 new Lightbox(e.currentTarget.getAttribute('src'), listOfPictures, linkOfVideos); 
             });
+            // evenement à la navigation au clavier de linkvideo pour creer une nouvelle lightbox
             linkvideo.addEventListener('keydown', e => {
                 if (e.keyCode === 13 || e.keyCode === 32 ) {
                     new Lightbox(e.currentTarget.getAttribute('src'), listOfPictures, linkOfVideos); 
@@ -32,8 +39,7 @@ class Lightbox {
         }
      }
     
-    // parametre (string) est un string url de l'image
-    // parametre (tableau) chemin vers la lightbox
+    // parametre url de l'image, images et videos du constructeur
     constructor(url, images, videos) {  
         this.element = this.buildDOM(url, images, videos)  
         this.players =  images.concat(videos);  
@@ -125,7 +131,7 @@ class Lightbox {
  
 
     // string url de l'image / image à afficher / vidéo à afficher
-    buildDOM(url, image, video) {
+    buildDOM(url, image) {
         const dom = document.createElement('div')
         dom.classList.add('lightbox')
         // renvoie code html si image ou video
@@ -137,7 +143,7 @@ class Lightbox {
             <div class="lightbox__container">
                 <img src="${url}" alt="">                
             </div>
-            <div class="title_of_picture">TEST</div>`
+            <!-- <div class="title_of_picture">TEST</div> -->`
         } else {
             dom.innerHTML = `
             <img class="lightbox__close" src="assets/icons/close_lightbox.svg" aria-label="Bouton pour fermer la lightbox"/>

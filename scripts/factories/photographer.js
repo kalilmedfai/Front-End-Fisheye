@@ -1,8 +1,10 @@
+// fonction à deux paramètres
 function photographerFactory(photographerData, photographerMedias) {
+    // on dit que photographerData regroupe les differentes variables des données stockées dans data/photographers.json
     const { id, name, portrait, city, country, tagline, price } = photographerData;
-
+    // constante picture récupère les portraits des photographes
     const picture = `assets/Photographers ID Photos/${portrait}`;
-
+    // fontion permettant de creer un utilisateur dans la page d'accueil
     function getUserCardDOM() {
         const a = document.createElement( 'a' );
         a.setAttribute("href", `photographer.html?id=${id}`)
@@ -47,7 +49,7 @@ function photographerFactory(photographerData, photographerMedias) {
         article.appendChild(p2);
         return (article);
     }
-
+    // fonction permettant de récupérer et d'afficher les informations en dessous du portrait du photographe dans la page d'accueil
     function getInfoUserDOM() {
         // ajout de la balise div que l'on nommme div
         const div = document.createElement( 'div' );

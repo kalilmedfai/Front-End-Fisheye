@@ -1,4 +1,9 @@
-    //Mettre le code JavaScript lié à la page photographer.html
+    // code JavaScript lié à la page photographer.html
+
+    // fonction permettant de :
+    // - récupérer grace au fetch les données dans data/photographers.json
+    // - récupérer l'id du photographe dans l'url
+    // - filtrer grace à l'id les donnees
     async function getInfoPhotographers() {
         const res = await fetch('data/photographers.json')
         const data = await res.json()
@@ -27,19 +32,23 @@
         }
     }
 
+    // fonction permettant :
+    // - d'afficher dans .photographer-header les information du photographe ainsi que sa photo de profil
+    // - afficher la galerie dans #main
+    // afficher le nombre total de like
     async function displayData(infoPhotographer, galleryPhotographers) {
         const mainContainer = document.querySelector(".photograph-header");
-        //new
+        // likes
         const mainPage = document.querySelector("#main");
 
         const infoPhotographerModel = photographerFactory(infoPhotographer, galleryPhotographers);
         const infoUserDOM = infoPhotographerModel.getInfoUserDOM();
         const pPUserDOM = infoPhotographerModel.getProfilePictureUserDOM();
-        //new
+        // likes
         const likesTotalDOM = infoPhotographerModel.getLikesOfPhotographerDOM();
         mainContainer.prepend(infoUserDOM);
         mainContainer.appendChild(pPUserDOM);
-        //new
+        // likes
         mainPage.appendChild(likesTotalDOM);
 
         const picturesContainer = document.querySelector(".gallery");
@@ -49,14 +58,15 @@
             const galleryPhotographerDOM = galleryPhotographerModel.getGalleryPhotographerDOM();
             picturesContainer.appendChild(galleryPhotographerDOM);
         });
-    };
-
+        Lightbox.init()
+    }
+    // fonction permettant d'effacer le contenue de la lightbox
     async function resetGallery() {
         const picturesContainer = document.querySelector(".gallery");
 
         picturesContainer.innerHTML = '';
     }
-
+    // fonction permettant de trier la gallerie de photos par Popularité, Titre (ordre alphabetique) ou par date (du plus récent au plus ancien)
     async function sortImagesInGallery(byTitle=false, byPopularity=false, byDate=false) {
         const { infoPhotographer, galleryPhotographers } = await getInfoPhotographers();
         if (byPopularity) {
@@ -69,6 +79,7 @@
                 const galleryPhotographerDOM = galleryPhotographerModel.getGalleryPhotographerDOM();
                 picturesContainer.appendChild(galleryPhotographerDOM);
             });
+            Lightbox.init()
         } else if (byTitle) {
             const gallery = galleryPhotographers.sort((a, b) => {
                 if (a.title < b.title) {
@@ -88,6 +99,7 @@
                 const galleryPhotographerDOM = galleryPhotographerModel.getGalleryPhotographerDOM();
                 picturesContainer.appendChild(galleryPhotographerDOM);
             });
+            Lightbox.init()
         } else {
             const gallery = galleryPhotographers.sort((a, b) => {
                 const dateA = new Date(a.date);
@@ -103,13 +115,13 @@
                 const galleryPhotographerDOM = galleryPhotographerModel.getGalleryPhotographerDOM();
                 picturesContainer.appendChild(galleryPhotographerDOM);
             });
-
+            Lightbox.init()
         }
     }
 
-
+    // fonction qui initialise toute la page et permet de l'appeler juste en dessous
     async function init() {
-        // Récupère les datas du photographe
+        
         const { infoPhotographer, galleryPhotographers } = await getInfoPhotographers();
         await displayData(infoPhotographer, galleryPhotographers);
 
@@ -134,9 +146,7 @@
             if (!(event.keyCode === 27 || event.key === 'Escape' || event.code === 'Escape')) return;
             closeModal();
         })
-
-        Lightbox.init()
-    };
+    }
 
     init();
  
