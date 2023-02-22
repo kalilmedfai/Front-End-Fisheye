@@ -9,7 +9,7 @@ dropdowns.forEach(dropdown => {
     const options = dropdown.querySelectorAll('.menu li');
 
     // événement au click sur le dropdown
-    dropdown.addEventListener('click', (e) => {
+    dropdown.addEventListener('click', () => {
         // on ajoute la class .caret-rotate qui dans le CSS permet la rotation du caret à 180°
         caret.classList.add('caret-rotate');
         // on ajoute la class .menu-open qui fait référence à l'ouverture du menu déroulant
